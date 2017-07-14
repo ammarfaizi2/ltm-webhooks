@@ -25,7 +25,21 @@ class ltm_receiver extends Controller
 			http_response_code(403);
 			die();
 		}
-		die("OK");
+		http_response_code(200);
+		if ($this->insert(json_decode(file_get_contents("php://input"), true))){
+			die(json_encode(["status"=>"ok"]));
+		} else {
+			die(json_encode(["status"=>"error"]));
+		}
+	}
+
+	private function insert($d)
+	{
+		$pdo = new \PDO("pgsql:dbname=ltm_chat;host=localhost;port=5432", "postgres", "ltm123");
+		$st = $pdo->prepare("INSERT INTO reply_logs (id, actor, text, reply_to_actor, reply_to_text, time) VALUES (:id, :actor, :text, :reply_to_actor, :reply_to_text, :time);");
+		$exe = $st->execute($d);
+		$st = $pdo = null;
+		return $exe;
 	}
 
 	private function authCheck()
@@ -35,8 +49,7 @@ class ltm_receiver extends Controller
 			isset($_SERVER['HTTP_AUTHORIZATION']) && 
 			isset($_SERVER['HTTP_X_SERVER_SIGNATURE']) &&
 			$_SERVER['HTTP_AUTHORIZATION'] === $this->auth['Auth'] && 
-			sha1(base64_decode($_SERVER['HTTP_X_SERVER_SIGNATURE'])) === $this->auth['ServerSignature'] &&
-			$_SERVER['REMOTE_ADDR'] === $this->auth['Host']
+			sha1(base64_decode($_SERVER['HTTP_X_SERVER_SIGNATURE'])) === $this->auth['ServerSignature']
 		;
 	}
 }
