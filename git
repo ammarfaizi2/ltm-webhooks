@@ -1,0 +1,20 @@
+#!/usr/bin/env php
+<?php
+$realpath = __DIR__;
+$commands = array(
+		"cd {$realpath}",
+		"git checkout dev1",
+		"git merge master",
+		"git checkout dev2",
+		"git merge master",
+		"git checkout protected",
+		"git merge master",
+		"git checkout master"
+	);
+
+$execute = "";
+foreach ($commands as $command) {
+	$execute .= $command ." && ";
+}
+$execute = rtrim(trim($execute), "&");
+print exec($execute)."\n\n";
