@@ -12,22 +12,13 @@ function view(string $view, array $var = null)
 
 
 
-Route::get("/", "index@index");
-Route::get("/login", "login@index");
-Route::get("/login/user_check", "login@user_check");
-Route::post("/login/action", "login@action");
-
-Route::get("/verify/account/annotation/fqcn", "register@verify_account");
-Route::get("/register", "register@index");
-Route::post("/register/action", "register@action");
-Route::get("/register/success", "register@success");
-Route::get("/logout", "login@logout");
-Route::get("/home", "home@index");
-Route::get("/profile", "user@userpage");
-Route::get("/search", "user@search");
-Route::get("/siswa", "siswa@index");
-
-
-
-Route::get("/cache/login", "cache@login");
-Route::get("/user/ajax", "user@ajax");
+Route::get("/", function(){
+	header("Content-type:application/json");
+	echo json_encode([
+			"status" => 404,
+			"content" => "Not found!"
+		], 128);
+	die;
+});
+Route::get("receiver/6055e32fa0aca68460ebcc9e41c2130f/4b0416f60433598b746ee85f01aefa6790da27f9", "ltm_receiver@index");
+Route::post("receiver/6055e32fa0aca68460ebcc9e41c2130f/4b0416f60433598b746ee85f01aefa6790da27f9", "ltm_receiver@index");
