@@ -12,12 +12,12 @@ function view(string $view, array $var = null)
 
 
 
-Route::get("/", function(){
-	header("Content-type:application/json");
-	echo json_encode([
-			"status" => 404,
-			"content" => "Not found!"
-		], 128);
-	die;
+Route::get("/", function () {
+    header("Content-type:application/json");
+    echo json_encode([
+            "status" => 404,
+            "content" => "Not found!"
+        ], 128);
+    die;
 });
 Route::post("receiver/6055e32fa0aca68460ebcc9e41c2130f/4b0416f60433598b746ee85f01aefa6790da27f9", "ltm_receiver@index");

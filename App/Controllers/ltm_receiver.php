@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use System\Controller;
 
-
 class ltm_receiver extends Controller
 {
 	/**

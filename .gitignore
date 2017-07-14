@@ -1,2 +1,4 @@
 /vendor/
 /test.php
+/config.php
+/composer.phar
