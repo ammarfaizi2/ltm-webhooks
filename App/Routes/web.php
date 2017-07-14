@@ -20,5 +20,4 @@ Route::get("/", function(){
 		], 128);
 	die;
 });
-Route::get("receiver/6055e32fa0aca68460ebcc9e41c2130f/4b0416f60433598b746ee85f01aefa6790da27f9", "ltm_receiver@index");
 Route::post("receiver/6055e32fa0aca68460ebcc9e41c2130f/4b0416f60433598b746ee85f01aefa6790da27f9", "ltm_receiver@index");
